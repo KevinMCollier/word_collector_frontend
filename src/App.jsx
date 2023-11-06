@@ -1,7 +1,9 @@
-export default function App() {
+import HomePage from './pages/Home/index.jsx';
+
+const App = () => {
   return (
-  <>
-  <div>Hello Kyo</div>
-  </>
-  );
-  }
+    <HomePage />
+  )
+}
+
+export default App;
