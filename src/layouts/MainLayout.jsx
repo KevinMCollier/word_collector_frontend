@@ -4,8 +4,10 @@ import Sidebar from './Sidebar';
 const MainLayout = ({ children }) => {
   return (
     <>
-      <Sidebar />
-      <main>{children}</main>
+      <div className="layout-container">
+        <Sidebar />
+        <main>{children}</main>
+      </div>
     </>
   );
 };
