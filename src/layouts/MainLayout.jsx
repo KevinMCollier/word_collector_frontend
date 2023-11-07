@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Sidebar from './Sidebar';
 
 const MainLayout = ({ children }) => {
   return (
     <>
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
+      <div className="layout-container">
+        <Sidebar />
+        <main>{children}</main>
+      </div>
     </>
   );
 };
