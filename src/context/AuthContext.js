@@ -1,7 +1,6 @@
 // This file is responsible for handling the authentication state
 import PropTypes from 'prop-types';
-
-// import React, { createContext, useReducer, useContext } from 'react';
+import { createContext, useReducer } from 'react';
 
 // Initial state of the authentication context
 const initialState = {
