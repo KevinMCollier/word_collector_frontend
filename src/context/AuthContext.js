@@ -1,6 +1,6 @@
 // This file is responsible for handling the authentication state
 import PropTypes from 'prop-types';
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 
 // Initial state of the authentication context
 const initialState = {
@@ -36,6 +36,14 @@ const authReducer = (state, action) => {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  // Initialize state from localStorage on mount
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    if (token && user) {
+      dispatch({ type: 'LOGIN', payload: { user, token }});
+    }
+  }, []);
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
       {children}
