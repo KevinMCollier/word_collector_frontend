@@ -1,20 +1,3 @@
-/*
-Overview:
-This functional component manages the state and behavior of my login form.
--credentials is a state variable storing email and password
--setCredentials is a function that updates the credentials state
--useState initlizes credentials with an object containing an empty email and pw
--Next we call the login function from my useAuth custom hook
-
--handleChange updates the credentials state when an input is typed into the field
--this uses the name attribute of the input field to determine which part to update
-
--handleSubmit is called when the form is submitted
--we prevent a page reload with preventDefault
-
--We render the form in the return
-*/
-
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
@@ -34,13 +17,16 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(credentials);
-      // Redirect to home page or show success message
-      alert('Login successful!');
-      navigate('/home');
+      const result = await login(credentials);
+      if (result) {
+        // Login successful
+        navigate('/home');
+      } else {
+        // Handle login failure
+        alert('Login failed. Please check your credentials.');
+      }
     } catch (error) {
-      alert('Login failed. Please try again.');
-      // Consider setting error state and displaying a message in the UI
+      alert(error.message);
     }
   };
 
