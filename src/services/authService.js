@@ -17,7 +17,7 @@ export const login = async (credentials) => {
     const data = await response.json();
 
     // Check if the response contains a user and an authentication token
-    if (!data || !data.authentication_token) {
+    if (!data || !data.token) {
       throw new Error('Invalid login credentials');
     }
 

@@ -46,7 +46,7 @@ export const useAuth = () => {
   }, [initializeAuth]);
 
   return {
-    ...state,
+    isAuthenticated: state.isAuthenticated,
     login,
     logout
   };
