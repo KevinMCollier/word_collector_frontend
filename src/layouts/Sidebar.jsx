@@ -5,19 +5,19 @@ const Sidebar = () => {
       {/* Include names of tags (backend -> context API) */}
 
       <div className="flex justify-center w-full mb-6">
-        <div>User Avatar Placeholder</div>
+        <div>User Avatar</div>
       </div>
 
       <div className="mb-4">
-        <div>Recent Categories Placeholder</div>
+        <div>Recent Categories</div>
       </div>
 
       <div className="mb-4">
-        <div>My Categories Placeholder</div>
+        <div>My Categories</div>
       </div>
 
       <div className="mb-4">
-        <div>Recommended Categories Placeholder</div>
+        <div>Recommended Categories</div>
       </div>
     </div>
   )
