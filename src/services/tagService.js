@@ -1,8 +1,15 @@
-const API_URL = 'http://localhost:3000/api/v1/tags'; // Replace with your actual API URL
+// tagService.js
 
-const fetchTags = async () => {
+const API_URL = 'http://localhost:3000/api/v1/tags';
+
+const getAuthHeaders = (token) => ({
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${token}`
+});
+
+const fetchTags = async (token) => {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL, { headers: getAuthHeaders(token) });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -13,9 +20,9 @@ const fetchTags = async () => {
   }
 };
 
-const fetchTag = async (id) => {
+const fetchTag = async (id, token) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`);
+    const response = await fetch(`${API_URL}/${id}`, { headers: getAuthHeaders(token) });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -26,13 +33,11 @@ const fetchTag = async (id) => {
   }
 };
 
-const createTag = async (tagData) => {
+const createTag = async (tagData, token) => {
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(token),
       body: JSON.stringify(tagData),
     });
     if (!response.ok) {
@@ -45,13 +50,11 @@ const createTag = async (tagData) => {
   }
 };
 
-const updateTag = async (id, tagData) => {
+const updateTag = async (id, tagData, token) => {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(token),
       body: JSON.stringify(tagData),
     });
     if (!response.ok) {
@@ -64,10 +67,11 @@ const updateTag = async (id, tagData) => {
   }
 };
 
-const deleteTag = async (id) => {
+const deleteTag = async (id, token) => {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',
+      headers: getAuthHeaders(token),
     });
     if (!response.ok) {
       throw new Error('Error deleting tag');
