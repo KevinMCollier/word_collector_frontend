@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { fetchTags } from '../services/tagService';
 
 export const TagContext = createContext();
@@ -21,4 +22,9 @@ export const TagProvider = ({ children }) => {
       {children}
     </TagContext.Provider>
   );
+
 };
+
+TagProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+}
