@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { useTag } from './useTag'; // Adjust the import path as needed
+import { useTag } from '../hooks/useTag'; // Adjust the import path as needed
 import Tag from './Tag'; // Adjust the import path as needed
 
 const TagsList = () => {

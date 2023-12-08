@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { TagContext } from './TagContext';
+import { TagContext } from '../context/TagContext';
 
 export const useTag = () => {
   const context = useContext(TagContext);

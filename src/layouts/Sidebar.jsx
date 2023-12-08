@@ -1,3 +1,5 @@
+import TagsList from '../components/TagList';
+
 const Sidebar = () => {
   return (
     <div className="bg-gray-200 h-screen w-1/6 min-w-[200px] fixed flex flex-col items-start p-4">
@@ -14,6 +16,7 @@ const Sidebar = () => {
 
       <div className="mb-4">
         <div>My Categories</div>
+        <TagsList />
       </div>
 
       <div className="mb-4">
