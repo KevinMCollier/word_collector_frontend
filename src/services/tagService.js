@@ -1,5 +1,3 @@
-// tagService.js
-
 const API_URL = 'http://localhost:3000/api/v1/tags';
 
 const getAuthHeaders = (token) => ({
