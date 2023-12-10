@@ -8,10 +8,11 @@ export const TagProvider = ({ children }) => {
   const [tags, setTags] = useState([]);
 
   // Fetch tags from the server and update state
-  const loadTags = async (token) => {
+  const loadTags = async (email, token) => {
     try {
-      const fetchedTags = await fetchTags(token);
+      const fetchedTags = await fetchTags(email, token);
       setTags(fetchedTags);
+      console.log("Tags after setTags:", tags)
     } catch (error) {
       console.error('Error loading tags:', error);
     }

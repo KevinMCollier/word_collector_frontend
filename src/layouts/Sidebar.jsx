@@ -1,6 +1,8 @@
 import TagsList from '../components/TagList';
 
 const Sidebar = () => {
+  console.log("Rendering TagsList in Sidebar");
+
   return (
     <div className="bg-gray-200 h-screen w-1/6 min-w-[200px] fixed flex flex-col items-start p-4">
       {/* Create a gray sidebar that covers the vertical height of the screen and approx. 1/6 width of the screen */}

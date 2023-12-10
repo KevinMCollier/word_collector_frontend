@@ -8,10 +8,12 @@ const TagsList = () => {
   const { state } = useContext(AuthContext);
 
   useEffect(() => {
-    if (state.token) {
-      loadTags(state.token);
+    if (state.token && state.user.email) {
+      loadTags(state.user.email, state.token);
     }
-  }, [state.token, loadTags]);
+  }, [state.token, state.user.email, loadTags]);
+
+  console.log("Tags in TagsList component:", tags);
 
   return (
     <div className="tags-list">
