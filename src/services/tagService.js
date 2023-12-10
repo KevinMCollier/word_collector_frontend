@@ -1,28 +1,29 @@
-// tagService.js
-
 const API_URL = 'http://localhost:3000/api/v1/tags';
 
-const getAuthHeaders = (token) => ({
+const getAuthHeaders = (email, token) => ({
   'Content-Type': 'application/json',
-  'Authorization': `Bearer ${token}`
+  'X-User-Email': email,
+  'X-User-Token': token
 });
 
-const fetchTags = async (token) => {
+const fetchTags = async (email, token) => {
   try {
-    const response = await fetch(API_URL, { headers: getAuthHeaders(token) });
+    const response = await fetch(API_URL, { headers: getAuthHeaders(email, token) });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    return await response.json();
+    const fetchedTags = await response.json();
+    console.log("Fetched tags:", fetchedTags);
+    return fetchedTags;
   } catch (error) {
     console.error('Error fetching tags:', error);
     throw error;
   }
 };
 
-const fetchTag = async (id, token) => {
+const fetchTag = async (id, email, token) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`, { headers: getAuthHeaders(token) });
+    const response = await fetch(`${API_URL}/${id}`, { headers: getAuthHeaders(email, token) });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -33,11 +34,11 @@ const fetchTag = async (id, token) => {
   }
 };
 
-const createTag = async (tagData, token) => {
+const createTag = async (tagData, email, token) => {
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
-      headers: getAuthHeaders(token),
+      headers: getAuthHeaders(email, token),
       body: JSON.stringify(tagData),
     });
     if (!response.ok) {
@@ -50,11 +51,11 @@ const createTag = async (tagData, token) => {
   }
 };
 
-const updateTag = async (id, tagData, token) => {
+const updateTag = async (id, tagData, email, token) => {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
-      headers: getAuthHeaders(token),
+      headers: getAuthHeaders(email, token),
       body: JSON.stringify(tagData),
     });
     if (!response.ok) {
@@ -67,11 +68,11 @@ const updateTag = async (id, tagData, token) => {
   }
 };
 
-const deleteTag = async (id, token) => {
+const deleteTag = async (id, email, token) => {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',
-      headers: getAuthHeaders(token),
+      headers: getAuthHeaders(email, token),
     });
     if (!response.ok) {
       throw new Error('Error deleting tag');

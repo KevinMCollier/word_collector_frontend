@@ -1,4 +1,3 @@
-// This file is responsible for handling the authentication state
 import PropTypes from 'prop-types';
 import { createContext, useReducer, useEffect } from 'react';
 
@@ -6,7 +5,8 @@ import { createContext, useReducer, useEffect } from 'react';
 const initialState = {
   isAuthenticated: false,
   user: null,
-  token: null
+  token: null,
+  email: null
 };
 
 // Create context
@@ -20,15 +20,15 @@ const authReducer = (state, action) => {
         ...state,
         isAuthenticated: true,
         user: action.payload.user,
-        token: action.payload.token
+        token: action.payload.token,
+        email: action.payload.email
       };
     case 'LOGOUT':
       return {
         ...initialState
       };
-      // handle other actions
-      default:
-        return state;
+    default:
+      return state;
   }
 };
 
@@ -39,19 +39,25 @@ export const AuthProvider = ({ children }) => {
   // Initialize state from localStorage on mount
   useEffect(() => {
     const token = localStorage.getItem('authToken');
-    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const user = JSON.parse(localStorage.getItem('user'));
+
     if (token && user) {
-      dispatch({ type: 'LOGIN', payload: { user, token }});
+      const email = user.email;
+      dispatch({ type: 'LOGIN', payload: { user, token, email }});
     }
   }, []);
+
+  console.log("AuthContext state:", state);
+
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { AuthContext }
+export { AuthContext };
