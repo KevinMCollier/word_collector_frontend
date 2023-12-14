@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { fetchTags } from '../services/tagService';
 
@@ -8,15 +8,15 @@ export const TagProvider = ({ children }) => {
   const [tags, setTags] = useState([]);
 
   // Fetch tags from the server and update state
-  const loadTags = async (email, token) => {
+  const loadTags = useCallback(async (email, token) => {
     try {
       const fetchedTags = await fetchTags(email, token);
       setTags(fetchedTags);
-      console.log("Tags after setTags:", tags)
+      console.log("Tags after setTags:", fetchedTags)
     } catch (error) {
       console.error('Error loading tags:', error);
     }
-  };
+  }, []);
 
   return (
     <TagContext.Provider value={{ tags, loadTags }}>
