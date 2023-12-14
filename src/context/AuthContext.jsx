@@ -19,7 +19,7 @@ const authReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
+        // user: action.payload.user,
         token: action.payload.token,
         email: action.payload.email
       };
@@ -42,8 +42,13 @@ export const AuthProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     if (token && user) {
-      const email = user.email;
-      dispatch({ type: 'LOGIN', payload: { user, token, email }});
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          token: user.authentication_token,
+          email: user.email
+        }
+      })
     }
   }, []);
 
