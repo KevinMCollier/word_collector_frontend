@@ -14,7 +14,7 @@ export const useAuth = () => {
       localStorage.setItem('authToken', token);
       localStorage.setItem('user', JSON.stringify(user)); // Ensure user object is stringified
 
-      dispatch({ type: 'LOGIN', payload: { user, token, email: user.email } });
+      dispatch({ type: 'LOGIN', payload: { token, email: user.email } });
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -34,8 +34,7 @@ export const useAuth = () => {
     const user = JSON.parse(localStorage.getItem('user')); // Parse the user object
 
     if (token && user) {
-      const email = user.email;
-      dispatch({ type: 'LOGIN', payload: { user, token, email } });
+      dispatch({ type: 'LOGIN', payload: { token, email: user.email } });
     }
   }, [dispatch]);
 
